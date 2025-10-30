@@ -38,3 +38,20 @@ def test_ingresar_usuario(page):
     # Assert
     with allure.step("validacion de mensaje de bienvenida"):
         assert titulo == Config.bienvenida_cliente, f"Mensaje erroneo {titulo}"
+
+
+@pytest.mark.skip("momentaneo")
+def test_restablecer_contrasena_cliente(page):
+    # arranque
+    login_page = LoginPage(page)
+    # action
+    with allure.step("Ingreso a pantalla login"):
+        login_page.Ir_a_login()
+    with allure.step("accion de restablecimiento de contraseña para un cliente"):
+        login_page.restablecer_contrasena()
+    # Assert
+    with allure.step("validacion de mensaje de confirmacion"):
+        assert (
+            login_page.mensaje_confirmacion_restablecer_contasena()
+            == "Contraseña restablecida"
+        ), "No se pudo realizar el cambio de contraseña"

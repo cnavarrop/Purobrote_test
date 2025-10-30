@@ -19,3 +19,6 @@ class BasePage:
 
     def esta_visible(self, selector: str) -> bool:
         return self.page.locator(selector).is_visible()
+
+    def obtener_mensaje(self, selector: str) -> str:
+        return self.page.locator(selector).inner_text().strip()
