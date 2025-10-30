@@ -16,10 +16,11 @@ def test_ir_al_login(page):
     # actions
     with allure.step("Ingreso a login page"):
         login_page.Ir_a_login()
+        titulo = login_page.return_titulo_login()
 
     # Assert
     with allure.step("validar title de pagina"):
-        assert login_page.validar_titulo()
+        assert titulo == "Admin Login", f"Mensaje erroneo {titulo}"
 
 
 def test_ingresar_usuario(page):
@@ -32,10 +33,8 @@ def test_ingresar_usuario(page):
     with allure.step("Ingreso a login page"):
         login_page.Ir_a_login()
     with allure.step("ingreso a dashboard"):
-        login_page.ingresar_cliente()
+        login_page.ingresar_cliente_login()
         titulo = dashboard.return_titulo_bienvenida()
     # Assert
     with allure.step("validacion de mensaje de bienvenida"):
-        assert (
-            dashboard.validar_mensaje_bienvenida_cliente() is True
-        ), f"Mensaje erroneo {titulo}"
+        assert titulo == Config.bienvenida_cliente, f"Mensaje erroneo {titulo}"

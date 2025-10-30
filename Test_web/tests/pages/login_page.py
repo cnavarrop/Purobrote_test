@@ -16,14 +16,11 @@ class LoginPage(BasePage):
     def Ir_a_login(self):
         self.ir_a(self.url_login)
 
-    def validar_titulo(self) -> bool:
-        titulo = self.obtener_titulo
-        print(titulo)
-        if titulo != "Admin Login":
-            return True
-        return False
+    def return_titulo_login(self) -> str:
+        titulo = self.obtener_titulo()
+        return titulo
 
-    def ingresar_cliente(self):
+    def ingresar_cliente_login(self):
         try:
             self.escribir(self.correo, Config.correo_cliente)
             self.escribir(self.password, Config.pass_cliente)
