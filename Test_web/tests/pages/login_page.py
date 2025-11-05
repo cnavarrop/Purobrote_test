@@ -7,7 +7,7 @@ from loguru import logger
 class LoginPage(BasePage):
 
     # selectores
-    url_login = f"{Config.url_staging}/admin/login"
+    url_login = f"{Config.url_staging}admin/login"
     titulo = "head > title"
     correo = "#username"
     password = "#password"
@@ -18,6 +18,10 @@ class LoginPage(BasePage):
     btn_accion_restablecer_contrasena = "body > div.swal2-container.swal2-center.swal2-backdrop-show > div > div.swal2-actions > button.swal2-confirm.swal2-styled"
     btn_cancelar_restablecer_contrasena = "body > div.swal2-container.swal2-center.swal2-backdrop-show > div > div.swal2-actions > button.swal2-cancel.swal2-styled"
     mensaje_confirmacion_cambio_contrasena = "#swal2-title"
+    boton_volver_a_la_tienda = "body > div > div > form > div.space-y-3 > a"
+    ventana_restablecer_contrasena = (
+        "body > div.swal2-container.swal2-center.swal2-backdrop-show > div"
+    )
 
     def Ir_a_login(self):
         self.ir_a(self.url_login)
@@ -34,6 +38,16 @@ class LoginPage(BasePage):
         except Exception as e:
             raise e
 
+    def validar_ingreso_cliente_a_dashboard(self, url: str) -> bool:
+        if self.page.url.endswith(url) and "usuario" in url:
+            return True
+        return False
+
+    def validar_ingreso_admin_a_dashboard(self, url: str) -> bool:
+        if self.page.url.endswith(url) and "admin" in url:
+            return True
+        return False
+
     def restablecer_contrasena(self):
         self.hacer_click(self.btn_restablecer_contrasena)
         self.escribir(self.textbox_restablecer_contrasena, Config.correo_cliente)
@@ -44,3 +58,22 @@ class LoginPage(BasePage):
 
     def return_titulo_restablecer_contrasena(self):
         return self.obtener_mensaje(self.mensaje_ventana_restablecer_contrasena)
+
+    def cancelar_restablecer_contrasena(self):
+        self.hacer_click(self.btn_cancelar_restablecer_contrasena)
+
+    def seguir_comprando(self):
+        self.hacer_click(self.boton_volver_a_la_tienda)
+
+    def ir_a_restablecer_contrasena(self):
+        self.hacer_click(self.btn_restablecer_contrasena)
+
+    def ventana_restablecer_contrasena_visible(self) -> bool:
+        return self.esta_visible(self.mensaje_ventana_restablecer_contrasena)
+
+    def ventana_restablecer_contrasena_no_visible(self) -> bool:
+        if self.page.wait_for_selector(
+            self.ventana_restablecer_contrasena, state="detached"
+        ):
+            return True
+        return False
