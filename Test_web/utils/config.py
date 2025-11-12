@@ -11,3 +11,4 @@ class Config:
     pass_cliente = os.getenv("PASS_CLIENTE")
     pass_admin = os.getenv("PASS_ADMIN")
     bienvenida_cliente = os.getenv("Bienvenida_Cliente")
+    numero_pedido = os.getenv("Pedido_ejemplo")

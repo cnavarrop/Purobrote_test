@@ -24,6 +24,10 @@ def test_ir_al_login(page):
 
 
 def test_ingresar_usuario(page):
+    """
+    test para comprobar el ingreso correcto de un usuario cliente
+    al dashboard del cliente
+    """
     # arranque
 
     login_page = LoginPage(page)
@@ -42,6 +46,9 @@ def test_ingresar_usuario(page):
 
 @pytest.mark.skip("momentaneo")
 def test_restablecer_contrasena_cliente(page):
+    """
+    test para comprobar el restablecimiento de contraseña de un cliente
+    """
     # arranque
     login_page = LoginPage(page)
     # action
