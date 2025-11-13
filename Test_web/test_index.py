@@ -1,5 +1,5 @@
 import pytest
-from tests.pages.index import IndexPage
+from Test_web.tests.pages.index_page import IndexPage
 from utils.config import Config
 import allure
 
