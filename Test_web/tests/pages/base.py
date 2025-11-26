@@ -22,3 +22,15 @@ class BasePage:
 
     def obtener_mensaje(self, selector: str) -> str:
         return self.page.locator(selector).inner_text().strip()
+
+    def esperar_elemento(self, selector: str, timeout: int = 5000):
+        self.page.wait_for_selector(selector, timeout=timeout)
+
+    def obtener_sweetAlert(self):
+        sweetalert = self.page.locator(".swal2-popup")
+        return sweetalert
+
+    def obtener_heading_sweetAlert(self):
+        sweetalert = self.obtener_sweetAlert()
+        heading = sweetalert.get_by_role("heading").inner_text().strip()
+        return heading

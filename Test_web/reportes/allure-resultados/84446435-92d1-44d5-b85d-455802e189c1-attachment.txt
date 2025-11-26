@@ -1,1 +1,0 @@
-<bound method BasePage.obtener_titulo of <tests.pages.login_page.LoginPage object at 0x000001CD0E4EB2C0>>
